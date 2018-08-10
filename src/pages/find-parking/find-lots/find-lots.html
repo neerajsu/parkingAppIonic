@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>{{'FIND PARKING' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="home">
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <ion-icon name='pin' isActive="true"></ion-icon>
+          </ion-label>
+          <ion-input placeholder="{{'SELECT_PARKING_LOT' | translate}}"></ion-input>
+        </ion-item>
+      </ion-list>
+      <!-- Google maps -->
+
+      <div [ngStyle]="{'height': mapsCSSHeight, 'width' : '100%'}">
+        <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
+          <agm-marker *ngFor="let marker of markers; let i = index" [latitude]="marker.latitude" [longitude]="marker.longitude" [iconUrl]="marker.iconUrl"
+            [markerClickable]="true" (markerClick)="markerClicked(marker, i)">
+            <!-- <agm-info-window>
+                          <strong class="small-font">{{marker.address}}</strong>
+                        </agm-info-window> -->
+          </agm-marker>
+
+          <!-- <agm-circle [latitude]="latitude" [lngitude]="longitude"
+                          [radius]="20000"
+                          [fillColor]="'red'"
+                          [circleDraggable]="true"
+                          [editable]="true">
+                      </agm-circle> -->
+
+        </agm-map>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- end of google maps -->
+  <!-- start of card of marker information-->
+  <ion-card *ngIf="selectedMarker">
+    <ion-card-content>
+      <ion-row>
+        <ion-col col-2>
+          <div>
+            <ion-icon name='pin'></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col col-10>
+          <div>{{selectedMarker.address}}</div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-2>
+          <div>
+            <ion-icon name='time'></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col col-10>
+          <div>{{selectedMarker.workingHours}}</div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-2>
+          <div>
+            <ion-icon name='call'></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col col-10>
+          <div>{{selectedMarker.phoneNumber}}</div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-2>
+          <div>
+            <ion-icon name='mail'></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col col-10>
+          <div>{{selectedMarker.email}}</div>
+        </ion-col>
+      </ion-row>
+      <!-- <p>{{post.content.rendered | trimHTML | truncate: 100 }}</p> -->
+    </ion-card-content>
+    <ion-row no-padding>
+      <ion-col text-left>
+        <button ion-button icon-left clear (click)="favoritePost(post)">
+          <ion-icon name='heart'></ion-icon>
+          Favorite
+        </button>
+      </ion-col>
+      <ion-col text-right>
+        <button ion-button clear (click)="findParkingSpot()">
+          Find Spots
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <!-- end of card of marker information -->
+  <!-- <form (submit)="findParkingSpot()">
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>Select Building</ion-label>
+        <ion-select [(ngModel)]="buildingSelection" name="building" interface="" (ionChange)="selectBuilding(buildingSelection)">
+          <ion-option *ngFor="let building of buildingsList" [value] = "building.code">
+            {{building.name}}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+      <div padding>
+        <button ion-button color="primary" block>Search for spots</button>
+      </div>
+    </ion-list>
+  </form> -->
+</ion-content>

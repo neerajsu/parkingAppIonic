@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="selectedMarker">Find spots in {{selectedMarker.label}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-row *ngFor="let spot of parkingSpots">
+        <ion-col col-3>
+          <div>
+            {{spot.parkingSpot}}
+            <br/> {{spot.statusCode}}
+          </div>
+        </ion-col>
+        <ion-col col-9>
+          <div>
+            {{spot.parkingSpotOwner}}
+            <br/> From : {{spot.releasedOn}} to {{spot.revokeOn}}
+          </div>
+        </ion-col>
+        <ion-list col-12>
+            <ion-item>
+                <button ion-button item-start clear icon-only >
+                    <ion-icon name="warning"></ion-icon>
+                  </button>
+                <button ion-button clear item-end (click)="useParkingSpot()">
+                    <ion-icon name="cart"></ion-icon>
+                    &nbsp; Use Spot
+                </button>
+            </ion-item>
+            <ion-item-divider>
+            </ion-item-divider>
+        </ion-list>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
