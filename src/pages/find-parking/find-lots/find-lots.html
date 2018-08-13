@@ -7,39 +7,29 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="home">
-  
-      <ion-list>
-        <ion-item>
-          <ion-label>
-            <ion-icon name='pin' isActive="true"></ion-icon>
-          </ion-label>
-          <ion-input (tap)="showAddressModal()" [(ngModel)]="address.place" type="text" placeholder="{{'SELECT_PARKING_LOT' | translate}}">
-          </ion-input>
-        </ion-item>
-      </ion-list>
-      <!-- Google maps -->
-
-      <div [ngStyle]="{'height': mapsCSSHeight, 'width' : '100%'}">
-        <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
-          <agm-marker *ngFor="let marker of markers; let i = index" [latitude]="marker.latitude" [longitude]="marker.longitude" [iconUrl]="marker.iconUrl"
-            [markerClickable]="true" (markerClick)="markerClicked(marker, i)">
-            <!-- <agm-info-window>
+<ion-content class="home">
+  <!-- Google maps -->
+  <div [ngStyle]="{'height': mapsCSSHeight, 'width' : '100%'}">
+    <ion-searchbar id="addressInputOnMap" placeholder="Search address here" animated="true" [(ngModel)]="address.place" (tap)="showAddressModal()"></ion-searchbar>
+    <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
+      <agm-marker *ngFor="let marker of markers; let i = index" [latitude]="marker.latitude" [longitude]="marker.longitude" [iconUrl]="marker.iconUrl"
+        [markerClickable]="true" (markerClick)="markerClicked(marker, i)">
+        <!-- <agm-info-window>
                           <strong class="small-font">{{marker.address}}</strong>
                         </agm-info-window> -->
-          </agm-marker>
+      </agm-marker>
 
-          <!-- <agm-circle [latitude]="latitude" [lngitude]="longitude"
+      <!-- <agm-circle [latitude]="latitude" [lngitude]="longitude"
                           [radius]="20000"
                           [fillColor]="'red'"
                           [circleDraggable]="true"
                           [editable]="true">
                       </agm-circle> -->
 
-        </agm-map>
-      </div>
-    
-  
+    </agm-map>
+  </div>
+
+
 
   <!-- end of google maps -->
   <!-- start of card of marker information-->
