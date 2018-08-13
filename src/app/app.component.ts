@@ -16,6 +16,7 @@ import { PlaceholderComponent } from '../pages/placeholder/placeholder-component
 import { FacebookConnectComponent } from '../pages/facebook-connect/facebook-connect-component/facebook-connect.component';
 import { LoginComponent } from '../pages/login/login-component/login.component';
 import { WordpressMenus } from '../pages/wordpress/wordpress-menus/wordpress-menus.component';
+import { PhoneNumberSignInComponent } from '../pages/phone-number-login/phone-number-signin/phone-number-signin.component';
 
 @Component({
 	templateUrl: './app.html'
@@ -23,9 +24,9 @@ import { WordpressMenus } from '../pages/wordpress/wordpress-menus/wordpress-men
 export class MyApp {
 	@ViewChild(Nav) nav: Nav;
 
-	rootPage = TabsComponent;
+	//rootPage = PhoneNumberSignInComponent;
 	menuPage = WordpressMenus;
-	pages: Array<{title: string, component: any, icon: string}>;
+	pages: Array<{ title: string, component: any, icon: string }>;
 	wordpressMenusNavigation: boolean = false;
 
 	constructor(
@@ -36,7 +37,7 @@ export class MyApp {
 		private splashScreen: SplashScreen,
 		private config: Config,
 		private menuController: MenuController
-		) {
+	) {
 		this.initializeApp();
 
 		this.translate.setDefaultLang('en');
@@ -48,19 +49,24 @@ export class MyApp {
 				storage.set('language', 'en');
 			}
 		});
-
+		
 		this.pages = [
-		  { title: 'HOME', component: TabsComponent, icon: 'home' },
-	    { title: 'SETTINGS', component: SettingsComponent, icon: 'settings'},
-	    { title: 'GRID', component: GridComponent, icon: 'grid'},
-	    { title: 'DATETIME', component: DatetimeComponent, icon: 'clock'},
-	    { title: 'RANGES', component: RangesComponent, icon: 'sunny'},
-	    { title: 'ACTION_SHEET', component: ActionSheetComponent, icon: 'create'},
-	    { title: 'PLACEHOLDER', component: PlaceholderComponent, icon: 'logo-buffer' },
-	    { title: 'Facebook Connect', component: FacebookConnectComponent, icon: 'logo-facebook' },
-	    { title: 'LOGIN', component: LoginComponent, icon: 'log-in' }
+			{ title: 'HOME', component: TabsComponent, icon: 'home' },
+			{ title: 'SETTINGS', component: SettingsComponent, icon: 'settings' },
+			{ title: 'GRID', component: GridComponent, icon: 'grid' },
+			{ title: 'DATETIME', component: DatetimeComponent, icon: 'clock' },
+			{ title: 'RANGES', component: RangesComponent, icon: 'sunny' },
+			{ title: 'ACTION_SHEET', component: ActionSheetComponent, icon: 'create' },
+			{ title: 'PLACEHOLDER', component: PlaceholderComponent, icon: 'logo-buffer' },
+			{ title: 'Facebook Connect', component: FacebookConnectComponent, icon: 'logo-facebook' },
+			{ title: 'LOGIN', component: LoginComponent, icon: 'log-in' }
 		];
 		this.wordpressMenusNavigation = config.wordpressMenusNavigation;
+	}
+
+	isStoredSessionValid(){
+		//TODO : Write Angular service which calls the java service to cvalidate session stored on phone
+		return true;
 	}
 
 	initializeApp() {
@@ -69,6 +75,11 @@ export class MyApp {
 			// this.platform.setDir('rtl', true);
 			this.statusBar.styleDefault();
 			this.splashScreen.hide();
+			if(this.isStoredSessionValid()){
+				this.nav.setRoot(TabsComponent);
+			} else {
+				this.nav.setRoot(PhoneNumberSignInComponent);
+			}
 		});
 	}
 

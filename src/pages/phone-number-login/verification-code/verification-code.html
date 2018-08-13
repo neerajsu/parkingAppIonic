@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-toolbar>
+        Verify Phone Number
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-label stacked>Eenter Verification Code</ion-label>
+            <ion-input [(ngModel)]="verificationCode" type="text" name="verification code"></ion-input>>
+        </ion-item>
+        <ion-item>
+            <div padding>
+                <button ion-button color="primary" block (tap)="submitVerificationCode()">Submit</button>
+            </div>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

@@ -8,14 +8,14 @@
 </ion-header>
 
 <ion-content padding class="home">
-  <ion-card>
-    <ion-card-content>
+  
       <ion-list>
         <ion-item>
           <ion-label>
             <ion-icon name='pin' isActive="true"></ion-icon>
           </ion-label>
-          <ion-input placeholder="{{'SELECT_PARKING_LOT' | translate}}"></ion-input>
+          <ion-input (tap)="showAddressModal()" [(ngModel)]="address.place" type="text" placeholder="{{'SELECT_PARKING_LOT' | translate}}">
+          </ion-input>
         </ion-item>
       </ion-list>
       <!-- Google maps -->
@@ -38,8 +38,8 @@
 
         </agm-map>
       </div>
-    </ion-card-content>
-  </ion-card>
+    
+  
 
   <!-- end of google maps -->
   <!-- start of card of marker information-->

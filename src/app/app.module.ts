@@ -1,7 +1,8 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
-import { SharedModule } from './shared/shared.module'
+import { SharedModule } from './shared/shared.module';
+import { IonicStorageModule } from '@ionic/storage';
 import { HomeModule } from '../pages/home/home.module';
 import { TabsModule } from '../pages/tabs/tabs.module';
 import { GoogleMapsModule } from '../pages/google-maps/google-maps.module';
@@ -27,6 +28,7 @@ import { PlaceholderModule } from '../pages/placeholder/placeholder.module';
 import { MyApp } from './app.component';
 import { FindParkingModule } from '../pages/find-parking/find-parking.module';
 import { Geolocation } from '@ionic-native/geolocation';
+import { PhoneNumberLoginModule } from '../pages/phone-number-login/phone-number-login.module';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { Geolocation } from '@ionic-native/geolocation';
         }
       }
     }),
+    IonicStorageModule.forRoot(),
     SharedModule,
     HomeModule,
     TabsModule,
@@ -66,7 +69,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     ChartsModule,
     FirebaseModule,
     PlaceholderModule,
-    FindParkingModule
+    FindParkingModule,
+    PhoneNumberLoginModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

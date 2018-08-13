@@ -4,6 +4,7 @@ import { ContactComponent } from '../../contact/contact-component/contact.compon
 import { Platform } from 'ionic-angular';
 import { FindLotsComponent } from '../../find-parking/find-lots/find-lots.component';
 import { HomeComponent } from '../../home/home-component/home.component';
+import { PhoneNumberSignInComponent } from '../../phone-number-login/phone-number-signin/phone-number-signin.component';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -13,7 +14,7 @@ export class TabsComponent {
   // should be each tab's root Page
   tab1Root: any = FindLotsComponent;
   tab2Root: any = HomeComponent;
-  tab3Root: any = ContactComponent;
+  tab3Root: any = PhoneNumberSignInComponent;
   tabBarPlacement: String = "top";
 
   constructor(public platform: Platform) {

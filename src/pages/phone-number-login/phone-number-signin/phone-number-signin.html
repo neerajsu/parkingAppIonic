@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>{{ 'LOGIN' | translate }}</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding text-center>
+    <div class="logo" padding-bottom>
+        <img src="assets/img/Costco_Wholesale_logo_2010-10-26.svg" />
+    </div>
+    <form (submit)="signUp()">
+      <ion-list>
+  
+        <ion-item>
+          <ion-label stacked>Phone Number</ion-label>
+          <ion-input mask="(***) *** - ****" [(ngModel)]="account.phoneNumber" name="email"></ion-input>>
+        </ion-item>
+  
+        <div padding>
+          <button ion-button icon-left block color="light" [disabled]="!isPhoneNumberValid() || disableSignInButton" id="sign-in-button">
+            <ion-icon name="log-in"></ion-icon>
+            {{ 'SIGN_UP' | translate }}
+          </button>
+        </div>
+  
+      </ion-list>
+    </form>
+  </ion-content>

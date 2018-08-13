@@ -28,7 +28,7 @@
     "HOME_MESSAGE": "Use the Ionic Framework App to get you up and running with mobile apps faster than ever before.",
     "CONTACT": "Contact",
     "LANGUAGE": "Language",
-    "LOGIN": "Login",
+    
     "LOGOUT": "Logout",
     "SIGN_UP": "Sign Up",
     "RESET_PASSWORD": "Reset Password",
@@ -39,7 +39,8 @@
 
     "FIND_PARKING": "Find/Request Parking",
     "FIND_PARKING_MESSAGE" : "Find and request available parking spots",
-    "SELECT_PARKING_LOT" : "Find parking lots near location"
+    "SELECT_PARKING_LOT" : "Find parking lots near location",
+    "LOGIN": "Login to the parking app"
     
 
 }

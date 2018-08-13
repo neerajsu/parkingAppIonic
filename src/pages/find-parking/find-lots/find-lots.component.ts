@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Events, MenuController } from 'ionic-angular';
+import { NavController, Events, MenuController, ModalController } from 'ionic-angular';
 
 import { AboutComponent } from '../../about/about-component/about.component';
 import { WordpressHome } from '../../wordpress/wordpress-home/wordpress-home.component';
@@ -19,15 +19,14 @@ import { YoutubeChannelComponent } from '../../youtube/youtube-channel/youtube-c
 import { BarcodeScannerComponent } from '../../barcode-scanner/barcode-scanner-component/barcode-scanner.component';
 import { ChartsComponent } from '../../charts/charts-component/charts.component';
 import { FirebaseHomeComponent } from '../../firebase/firebase-home/firebase-home.component';
-import {LocationService} from '../../../app/shared/services/location/location.service';
 import { Platform } from 'ionic-angular';
 import { GoogleMapsScriptProtocol } from '../../../../node_modules/@agm/core';
 import { FindSpotsComponent } from '../find-spots/find-spots.component';
+import { AutocompletePage } from '../autocomplete/autocomplete.component';
 
 @Component({
 	selector: 'find-lots',
-	templateUrl: 'find-lots.html',
-	providers : [LocationService]
+	templateUrl: 'find-lots.html'
 })
 export class FindLotsComponent {
 	buildingsList = [
@@ -50,6 +49,7 @@ export class FindLotsComponent {
 	mapsCSSHeight: String;
 	zoom: number = 15;
 	selectedMarker:any;
+	address:any;
 	
   
   // Google Map center
@@ -89,10 +89,13 @@ export class FindLotsComponent {
 		private navController: NavController,
 		private menuController: MenuController,
 		private events: Events,
-		private locationService: LocationService,
+		private modalCtrl:ModalController,
 		public platform: Platform){
 			this.deviceHeight = platform.height();
 			this.deviceWidth = platform.width();
+			this.address = {
+				'place': ''
+			};
 		}
 
 	ngOnInit() {
@@ -129,15 +132,19 @@ export class FindLotsComponent {
 		});
 	}
 
-	useLocation(){
-		this.locationService.getCurrentPositionPromise().then((response) => {
-			this.latitude = response.coords.latitude;
-			this.longitude = response.coords.longitude;
-		});
-	}
-
 	selectBuilding(buildingSelection : any) {
 		//Do something with updating drop downs/values based on this selection
 	}
+
+	showAddressModal () {
+		let modal = this.modalCtrl.create(AutocompletePage);
+		let me = this;
+		modal.onDidDismiss(data => {
+		  this.address.place = data.place;
+		  this.latitude = data.latitude;
+		  this.longitude = data.longitude;
+		});
+		modal.present();
+	  }
 
 }
